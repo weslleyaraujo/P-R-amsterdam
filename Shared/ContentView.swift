@@ -41,14 +41,27 @@ struct ContentView: View {
         NavigationView {
             ScrollView {
                 Spacer()
-                VStack(spacing: 24) {
-                    if let data = network.parkings?.data {
-                        ForEach(data) { parking in
-                            Row(title: "\(parking.location)", isAvailable: parking.availability == "available" ? true : false, value: String(parking.spaces) == "0" ? "unknown" : String(parking.spaces))
+                switch network.status {
+                case .Pending:
+                    VStack(alignment: .center) {
+                        ProgressView()
+                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                case .Rejected:
+                        Text("Error")
+                case .Resolved:
+                        VStack(spacing: 24) {
+                            if let data = network.parkings?.data {
+                                ForEach(data) { parking in
+                                    let title = "\(parking.location)";
+                                    let spaces = String(parking.spaces);
+                                    Row(title: title, isAvailable: parking.availability == "available" ? true : false, value: spaces == "0" ? "unknown" : spaces)
+                                }
+                            }
                         }
+                case .Idle:
+                     onAppear {
+                        network.load()
                     }
-                }.onAppear {
-                    network.getParkings()
                 }
             }.navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05))
         }
