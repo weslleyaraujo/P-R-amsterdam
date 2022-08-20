@@ -8,9 +8,16 @@
 import Foundation
 
 struct Parking:  Decodable {
+    enum Availability: String, Codable {
+        case Closed = "closed",
+             Available = "available",
+             NoInfo = "no information",
+             Full = "full"
+        
+    }
     struct Location: Identifiable, Decodable {
         var id: String;
-        var availability: String
+        var availability: Availability;
         var location: String
         var spaces: Int
     }
@@ -18,3 +25,4 @@ struct Parking:  Decodable {
     var data: [Location]
     
 }
+
