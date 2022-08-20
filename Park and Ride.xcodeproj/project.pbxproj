@@ -17,6 +17,10 @@
 		C0DE2AAF28B0011E0078EB1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2A8528B0011D0078EB1A /* ContentView.swift */; };
 		C0DE2AB028B0011E0078EB1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DE2A8628B0011E0078EB1A /* Assets.xcassets */; };
 		C0DE2AB128B0011E0078EB1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DE2A8628B0011E0078EB1A /* Assets.xcassets */; };
+		C0DE2AC128B002360078EB1A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC028B002360078EB1A /* Network.swift */; };
+		C0DE2AC228B002360078EB1A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC028B002360078EB1A /* Network.swift */; };
+		C0DE2ACA28B002B50078EB1A /* ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC928B002B50078EB1A /* ParkingModel.swift */; };
+		C0DE2ACB28B002B50078EB1A /* ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC928B002B50078EB1A /* ParkingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,8 @@
 		C0DE2AA428B0011E0078EB1A /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DE2AA828B0011E0078EB1A /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		C0DE2AAA28B0011E0078EB1A /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		C0DE2AC028B002360078EB1A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C0DE2AC928B002B50078EB1A /* ParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,8 @@
 				C0DE2A8428B0011D0078EB1A /* Park_and_RideApp.swift */,
 				C0DE2A8528B0011D0078EB1A /* ContentView.swift */,
 				C0DE2A8628B0011E0078EB1A /* Assets.xcassets */,
+				C0DE2AC028B002360078EB1A /* Network.swift */,
+				C0DE2AC928B002B50078EB1A /* ParkingModel.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -301,6 +309,8 @@
 			files = (
 				C0DE2AAE28B0011E0078EB1A /* ContentView.swift in Sources */,
 				C0DE2AAC28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
+				C0DE2ACA28B002B50078EB1A /* ParkingModel.swift in Sources */,
+				C0DE2AC128B002360078EB1A /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +320,8 @@
 			files = (
 				C0DE2AAF28B0011E0078EB1A /* ContentView.swift in Sources */,
 				C0DE2AAD28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
+				C0DE2ACB28B002B50078EB1A /* ParkingModel.swift in Sources */,
+				C0DE2AC228B002360078EB1A /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
