@@ -10,12 +10,12 @@ import SwiftUI
 
 
 class Network: ObservableObject {
-    enum Status {  case Pending, Idle, Rejected, Resolved }
+    enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
     func load() {
         guard let url = URL(string: "https://park-and-ride-api.vercel.app/api/hello") else { fatalError("Missing URL") }
 
         let urlRequest = URLRequest(url: url)
-        self.status = Status.Pending;
+        self.status = self.parkings != nil ? Status.Refreshing: Status.Pending;
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 print("Request error: ", error)

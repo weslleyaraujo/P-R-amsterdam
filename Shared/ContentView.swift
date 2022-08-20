@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-func getAccentColor(availability: Parking.Availability, spaces: String) -> Color {
+func getAccentColor(availability: Parking.Availability) -> Color {
     var color: Color {
         switch availability {
-        case .Closed: return .gray;
-        case .NoInfo: return .gray;
-        case .Available: return spaces == "0" ? .mint : .green;
+        case .Closed, .NoInfo: return .gray;
+        case .Available: return .green;
         case .Full: return .red;
         }
     }
@@ -42,7 +41,7 @@ struct Count: View {
 
 
     var body: some View {
-        let color: Color = getAccentColor(availability:availability, spaces: spaces)
+        let color: Color = getAccentColor(availability:availability)
         ZStack(alignment: .leading) {
             Image(systemName: icon).font(Font.system(.subheadline)).padding(.leading, 4).foregroundColor(color)
             Text(content).bold().padding(.horizontal, 8).padding(.vertical, 4).padding(.leading, 16).background(Capsule().fill(color.opacity(0.05))).font(.subheadline).foregroundColor(color)
@@ -56,50 +55,42 @@ struct Row: View {
     var spaces: String;
     var body: some View {
         HStack {
-            Text(title).bold().font(.headline).padding(.vertical, 24).padding(.horizontal).foregroundColor(.black)
+            Text(title).bold().font(.headline).padding(.vertical, 24).padding(.horizontal, 2)
             Spacer()
-            Count(spaces: spaces, availability: availability).padding(.horizontal)
-        }.frame(maxWidth: .infinity, alignment: .bottom).background(.white).cornerRadius(6).shadow(color: Color.black.opacity(0.04), radius: 100, x: 20, y: 0).padding(.horizontal)
+            Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
+        }.frame(maxWidth: .infinity, alignment: .bottom)
         
     }
 }
 
 struct ContentView: View {
-    @EnvironmentObject var network: Network
+    @ObservedObject var network: Network
     var body: some View {
         NavigationView {
-            ScrollView {
-                Spacer()
-                Spacer()
+            List {
                 switch network.status {
                 case .Pending:
-                    VStack(alignment: .center) {
-                        ProgressView()
-                    }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
                 case .Rejected:
-                        Text("Error")
-                case .Resolved:
-                        VStack(spacing: 24) {
-                            if let data = network.parkings?.data {
-                                ForEach(data) { parking in
-                                    let title = "\(parking.location)";
-                                    let spaces = String(parking.spaces);
-                                    Row(title: title, availability: parking.availability, spaces: spaces)
-                                }
-                            }
+                    Text("Error")
+                    
+                default:
+                    if let data = network.parkings?.data {
+                        ForEach(data) { parking in
+                            let title = "\(parking.location)";
+                            let spaces = String(parking.spaces);
+                            Row(title: title, availability: parking.availability, spaces: spaces)
                         }
-                case .Idle:
-                     onAppear {
-                        network.load()
                     }
                 }
-            }.navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05))
+            }.navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {
+                network.load();
+            }.onAppear {
+                print("onAppear")
+                network.load();
+            }
+            
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}

@@ -12,7 +12,7 @@ struct Park_and_RideApp: App {
     var network = Network();
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(network)
+            ContentView(network: network)
         }
     }
 }
