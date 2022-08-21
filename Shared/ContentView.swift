@@ -56,7 +56,7 @@ struct Row: View {
     var spaces: String;
     var body: some View {
         HStack {
-            Text(title).bold().font(.headline).padding(.vertical, 24).padding(.horizontal, 2)
+            Text(title).bold().font(.headline).padding(.vertical, 24)
             Spacer()
             Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
         }.frame(maxWidth: .infinity, alignment: .bottom)
@@ -85,7 +85,6 @@ struct ContentView: View {
                 default:
                     if let data = network.parkings?.data {
                         Section {
-                            
                             ForEach(data) { parking in
                                 let title = "\(parking.location)";
                                 let spaces = String(parking.spaces);
@@ -95,7 +94,7 @@ struct ContentView: View {
                             if network.lastNetworkUpdateRequest != nil {
                                 VStack(alignment: .center, spacing: 0) {
                                     Spacer(minLength: 2)
-                                    Text(self.getLastUserUpdate())
+                                    Text("Last updated at \(self.getLastUserUpdate())").font(.caption2)
                                 }.frame(maxWidth: .infinity)
                             }
                         }
