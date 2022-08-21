@@ -25,7 +25,7 @@ struct Count: View {
     var content: String {
         switch availability {
         case .Closed: return "Closed";
-        case.NoInfo: return "";
+        case .NoInfo: return "Unknown";
         case .Available: return spaces == "0" ? "Available" : spaces;
         case .Full: return "Full";
         }
@@ -33,8 +33,9 @@ struct Count: View {
     var icon: String {
         switch availability {
         case .Full: return "xmark.circle";
-        case .NoInfo, .Closed: return "minus.circle";
+        case .Closed: return "minus.circle";
         case .Available: return "checkmark.circle";
+        case .NoInfo: return "questionmark.circle";
         }
     }
     
@@ -65,6 +66,13 @@ struct Row: View {
 
 struct ContentView: View {
     @ObservedObject var network: Network
+    func getLastUserUpdate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        let value = dateFormatter.string(from: Date())
+        return value;
+    }
     var body: some View {
         NavigationView {
             List {
@@ -76,10 +84,20 @@ struct ContentView: View {
                     
                 default:
                     if let data = network.parkings?.data {
-                        ForEach(data) { parking in
-                            let title = "\(parking.location)";
-                            let spaces = String(parking.spaces);
-                            Row(title: title, availability: parking.availability, spaces: spaces)
+                        Section {
+                            
+                            ForEach(data) { parking in
+                                let title = "\(parking.location)";
+                                let spaces = String(parking.spaces);
+                                Row(title: title, availability: parking.availability, spaces: spaces)
+                            }
+                        }  footer: {
+                            if network.lastNetworkUpdateRequest != nil {
+                                VStack(alignment: .center, spacing: 0) {
+                                    Spacer(minLength: 2)
+                                    Text(self.getLastUserUpdate())
+                                }.frame(maxWidth: .infinity)
+                            }
                         }
                     }
                 }
@@ -89,8 +107,8 @@ struct ContentView: View {
                 print("onAppear")
                 network.load();
             }
-            
         }
+        
     }
 }
 

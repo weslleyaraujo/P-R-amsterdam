@@ -10,8 +10,18 @@ import SwiftUI
 
 
 class Network: ObservableObject {
+    let defaults = UserDefaults.standard;
     enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
     func load() {
+        let now = Date();
+        defaults.set(now, forKey: UserDefaultsKeys.LastNetworkUpdateRequest.rawValue);
+        self.lastNetworkUpdateRequest = now;
+        let lastUpdate = defaults.object(forKey: UserDefaultsKeys.LastNetworkUpdate.rawValue) as? Date ?? Date();
+        let diff = (Date().timeIntervalSinceReferenceDate - lastUpdate.timeIntervalSinceReferenceDate) / 60.0;
+        if (diff < 1 && parkings != nil) {
+            return;
+        }
+        
         guard let url = URL(string: "https://park-and-ride-api.vercel.app/api/hello") else { fatalError("Missing URL") }
 
         let urlRequest = URLRequest(url: url)
@@ -24,9 +34,9 @@ class Network: ObservableObject {
             }
 
             guard let response = response as? HTTPURLResponse else { return }
-            print(response.statusCode)
             if response.statusCode == 200 {
                 guard let data = data else { return }
+                self.defaults.set(Date(), forKey: UserDefaultsKeys.LastNetworkUpdate.rawValue);
                 DispatchQueue.main.async {
                     do {
                         let decodedParkings = try JSONDecoder().decode(Parking.self, from: data)
@@ -45,4 +55,5 @@ class Network: ObservableObject {
     
     @Published var parkings: Parking? = nil
     @Published var status: Status = Status.Idle;
+    @Published var lastNetworkUpdateRequest: Date? = nil;
 }
