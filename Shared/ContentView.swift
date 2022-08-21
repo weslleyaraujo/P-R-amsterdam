@@ -51,6 +51,7 @@ struct Count: View {
 }
 
 struct Row: View {
+    @Environment(\.editMode) var mode;
     var title: String;
     var availability: Parking.Availability;
     var spaces: String;
@@ -58,7 +59,9 @@ struct Row: View {
         HStack {
             Text(title).bold().font(.headline).padding(.vertical, 24)
             Spacer()
-            Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
+            if (self.mode?.wrappedValue.isEditing ?? false) != true {
+                Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
+            }
         }.frame(maxWidth: .infinity, alignment: .bottom)
         
     }
@@ -73,6 +76,11 @@ struct ContentView: View {
         let value = dateFormatter.string(from: Date())
         return value;
     }
+    
+    func onRowMove(from source: IndexSet, to destination: Int) -> Void {
+        
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -89,7 +97,7 @@ struct ContentView: View {
                                 let title = "\(parking.location)";
                                 let spaces = String(parking.spaces);
                                 Row(title: title, availability: parking.availability, spaces: spaces)
-                            }
+                            }.onMove(perform: self.onRowMove)
                         }  footer: {
                             if network.lastNetworkUpdateRequest != nil {
                                 VStack(alignment: .center, spacing: 0) {
@@ -100,7 +108,11 @@ struct ContentView: View {
                         }
                     }
                 }
-            }.navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {
+            }
+            .toolbar {
+                EditButton()
+            }
+            .navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {
                 network.load();
             }.onAppear {
                 print("onAppear")
