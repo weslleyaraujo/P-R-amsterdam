@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01F137228B4062C006A72A9 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F137128B4062C006A72A9 /* Components.swift */; };
+		C01F137328B4062C006A72A9 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F137128B4062C006A72A9 /* Components.swift */; };
+		C01F137428B4062C006A72A9 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01F137128B4062C006A72A9 /* Components.swift */; };
+		C01F137528B407F1006A72A9 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC028B002360078EB1A /* Network.swift */; };
+		C04F1E1128B40280004DDAE5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04F1E1028B40280004DDAE5 /* WidgetKit.framework */; };
+		C04F1E1328B40280004DDAE5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C04F1E1228B40280004DDAE5 /* SwiftUI.framework */; };
+		C04F1E1628B40280004DDAE5 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04F1E1528B40280004DDAE5 /* Widget.swift */; };
+		C04F1E1928B40281004DDAE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C04F1E1828B40281004DDAE5 /* Assets.xcassets */; };
+		C04F1E1B28B40281004DDAE5 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C04F1E1728B40280004DDAE5 /* Widget.intentdefinition */; };
+		C04F1E1C28B40281004DDAE5 /* Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C04F1E1728B40280004DDAE5 /* Widget.intentdefinition */; };
+		C04F1E1F28B40281004DDAE5 /* WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C04F1E0E28B40280004DDAE5 /* WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C04F1E2628B4048D004DDAE5 /* ParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AC928B002B50078EB1A /* ParkingModel.swift */; };
+		C04F1E2728B40490004DDAE5 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */; };
 		C0DE2A9F28B0011E0078EB1A /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2A9E28B0011E0078EB1A /* Tests_iOSLaunchTests.swift */; };
 		C0DE2AA928B0011E0078EB1A /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AA828B0011E0078EB1A /* Tests_macOS.swift */; };
 		C0DE2AAB28B0011E0078EB1A /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2AAA28B0011E0078EB1A /* Tests_macOSLaunchTests.swift */; };
@@ -26,6 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C04F1E1D28B40281004DDAE5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0DE2A7F28B0011D0078EB1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C04F1E0D28B40280004DDAE5;
+			remoteInfo = WidgetExtension;
+		};
 		C0DE2A9928B0011E0078EB1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C0DE2A7F28B0011D0078EB1A /* Project object */;
@@ -42,7 +62,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C04F1E2028B40281004DDAE5 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C04F1E1F28B40281004DDAE5 /* WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		C01F137128B4062C006A72A9 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		C04F1E0E28B40280004DDAE5 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C04F1E1028B40280004DDAE5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C04F1E1228B40280004DDAE5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C04F1E1528B40280004DDAE5 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
+		C04F1E1728B40280004DDAE5 /* Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Widget.intentdefinition; sourceTree = "<group>"; };
+		C04F1E1828B40281004DDAE5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C04F1E1A28B40281004DDAE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0DE2A8428B0011D0078EB1A /* Park_and_RideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Park_and_RideApp.swift; sourceTree = "<group>"; };
 		C0DE2A8528B0011D0078EB1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C0DE2A8628B0011E0078EB1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +103,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C04F1E0B28B40280004DDAE5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C04F1E1328B40280004DDAE5 /* SwiftUI.framework in Frameworks */,
+				C04F1E1128B40280004DDAE5 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0DE2A8828B0011E0078EB1A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -92,12 +143,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C04F1E0F28B40280004DDAE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C04F1E1028B40280004DDAE5 /* WidgetKit.framework */,
+				C04F1E1228B40280004DDAE5 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C04F1E1428B40280004DDAE5 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				C04F1E1528B40280004DDAE5 /* Widget.swift */,
+				C04F1E1728B40280004DDAE5 /* Widget.intentdefinition */,
+				C04F1E1828B40281004DDAE5 /* Assets.xcassets */,
+				C04F1E1A28B40281004DDAE5 /* Info.plist */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 		C0DE2A7E28B0011D0078EB1A = {
 			isa = PBXGroup;
 			children = (
 				C0DE2A8328B0011D0078EB1A /* Shared */,
 				C0DE2A9228B0011E0078EB1A /* macOS */,
 				C0DE2A9B28B0011E0078EB1A /* Tests iOS */,
+				C04F1E1428B40280004DDAE5 /* Widget */,
+				C04F1E0F28B40280004DDAE5 /* Frameworks */,
 				C0DE2A8C28B0011E0078EB1A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -111,6 +184,7 @@
 				C0DE2AC028B002360078EB1A /* Network.swift */,
 				C0DE2AC928B002B50078EB1A /* ParkingModel.swift */,
 				C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */,
+				C01F137128B4062C006A72A9 /* Components.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -122,6 +196,7 @@
 				C0DE2A9128B0011E0078EB1A /* Park and Ride.app */,
 				C0DE2A9828B0011E0078EB1A /* Tests iOS.xctest */,
 				C0DE2AA428B0011E0078EB1A /* Tests macOS.xctest */,
+				C04F1E0E28B40280004DDAE5 /* WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,6 +231,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C04F1E0D28B40280004DDAE5 /* WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C04F1E2328B40281004DDAE5 /* Build configuration list for PBXNativeTarget "WidgetExtension" */;
+			buildPhases = (
+				C04F1E0A28B40280004DDAE5 /* Sources */,
+				C04F1E0B28B40280004DDAE5 /* Frameworks */,
+				C04F1E0C28B40280004DDAE5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WidgetExtension;
+			productName = WidgetExtension;
+			productReference = C04F1E0E28B40280004DDAE5 /* WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		C0DE2A8A28B0011E0078EB1A /* Park and Ride (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0DE2AB428B0011E0078EB1A /* Build configuration list for PBXNativeTarget "Park and Ride (iOS)" */;
@@ -163,10 +255,12 @@
 				C0DE2A8728B0011E0078EB1A /* Sources */,
 				C0DE2A8828B0011E0078EB1A /* Frameworks */,
 				C0DE2A8928B0011E0078EB1A /* Resources */,
+				C04F1E2028B40281004DDAE5 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C04F1E1E28B40281004DDAE5 /* PBXTargetDependency */,
 			);
 			name = "Park and Ride (iOS)";
 			productName = "Park and Ride (iOS)";
@@ -236,6 +330,9 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					C04F1E0D28B40280004DDAE5 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					C0DE2A8A28B0011E0078EB1A = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -269,11 +366,20 @@
 				C0DE2A9028B0011E0078EB1A /* Park and Ride (macOS) */,
 				C0DE2A9728B0011E0078EB1A /* Tests iOS */,
 				C0DE2AA328B0011E0078EB1A /* Tests macOS */,
+				C04F1E0D28B40280004DDAE5 /* WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C04F1E0C28B40280004DDAE5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C04F1E1928B40281004DDAE5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0DE2A8928B0011E0078EB1A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,12 +413,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C04F1E0A28B40280004DDAE5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C04F1E1B28B40281004DDAE5 /* Widget.intentdefinition in Sources */,
+				C04F1E1628B40280004DDAE5 /* Widget.swift in Sources */,
+				C01F137528B407F1006A72A9 /* Network.swift in Sources */,
+				C01F137428B4062C006A72A9 /* Components.swift in Sources */,
+				C04F1E2628B4048D004DDAE5 /* ParkingModel.swift in Sources */,
+				C04F1E2728B40490004DDAE5 /* UserDefaultsKeys.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C0DE2A8728B0011E0078EB1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C0DE2AAE28B0011E0078EB1A /* ContentView.swift in Sources */,
 				C0DE2AAC28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
+				C04F1E1C28B40281004DDAE5 /* Widget.intentdefinition in Sources */,
+				C01F137228B4062C006A72A9 /* Components.swift in Sources */,
 				C0DE2ACE28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */,
 				C0DE2ACA28B002B50078EB1A /* ParkingModel.swift in Sources */,
 				C0DE2AC128B002360078EB1A /* Network.swift in Sources */,
@@ -324,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0DE2AAF28B0011E0078EB1A /* ContentView.swift in Sources */,
+				C01F137328B4062C006A72A9 /* Components.swift in Sources */,
 				C0DE2AAD28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
 				C0DE2ACF28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */,
 				C0DE2ACB28B002B50078EB1A /* ParkingModel.swift in Sources */,
@@ -352,6 +474,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C04F1E1E28B40281004DDAE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C04F1E0D28B40280004DDAE5 /* WidgetExtension */;
+			targetProxy = C04F1E1D28B40281004DDAE5 /* PBXContainerItemProxy */;
+		};
 		C0DE2A9A28B0011E0078EB1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C0DE2A8A28B0011E0078EB1A /* Park and Ride (iOS) */;
@@ -365,6 +492,65 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		C04F1E2128B40281004DDAE5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M35XE7CE36;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride.Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C04F1E2228B40281004DDAE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M35XE7CE36;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride.Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		C0DE2AB228B0011E0078EB1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -477,6 +663,7 @@
 		C0DE2AB528B0011E0078EB1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -507,6 +694,7 @@
 		C0DE2AB628B0011E0078EB1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -665,6 +853,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C04F1E2328B40281004DDAE5 /* Build configuration list for PBXNativeTarget "WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C04F1E2128B40281004DDAE5 /* Debug */,
+				C04F1E2228B40281004DDAE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C0DE2A8228B0011D0078EB1A /* Build configuration list for PBXProject "Park and Ride" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -12,7 +12,7 @@ import SwiftUI
 class Network: ObservableObject {
     let defaults = UserDefaults.standard;
     enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
-    func load() {
+    func load(completion: @escaping (Parking) -> ()) {
         let now = Date();
         defaults.set(now, forKey: UserDefaultsKeys.LastNetworkUpdateRequest.rawValue);
         self.lastNetworkUpdateRequest = now;
@@ -23,7 +23,7 @@ class Network: ObservableObject {
         }
         
         guard let url = URL(string: "https://park-and-ride-api.vercel.app/api/hello") else { fatalError("Missing URL") }
-
+        
         let urlRequest = URLRequest(url: url)
         self.status = self.parkings != nil ? Status.Refreshing: Status.Pending;
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
@@ -42,6 +42,7 @@ class Network: ObservableObject {
                         let decodedParkings = try JSONDecoder().decode(Parking.self, from: data)
                         self.parkings = decodedParkings
                         self.status = Status.Resolved;
+                        completion(decodedParkings)
                     } catch let error {
                         self.status = Status.Rejected;
                         print("Error decoding: ", error)
@@ -49,7 +50,7 @@ class Network: ObservableObject {
                 }
             }
         }
-
+        
         dataTask.resume()
     }
     

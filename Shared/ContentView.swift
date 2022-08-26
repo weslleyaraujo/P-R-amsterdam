@@ -7,66 +7,6 @@
 
 import SwiftUI
 
-func getAccentColor(availability: Parking.Availability) -> Color {
-    var color: Color {
-        switch availability {
-        case .Closed, .NoInfo: return .gray;
-        case .Available: return .green;
-        case .Full: return .red;
-        }
-    }
-    
-    return color
-}
-
-struct Count: View {
-    var spaces: String;
-    var availability: Parking.Availability;
-    var content: String {
-        switch availability {
-        case .Closed: return "Closed";
-        case .NoInfo: return "Unknown";
-        case .Available: return spaces == "0" ? "Available" : spaces;
-        case .Full: return "Full";
-        }
-    }
-    var icon: String {
-        switch availability {
-        case .Full: return "xmark.circle";
-        case .Closed: return "minus.circle";
-        case .Available: return "checkmark.circle";
-        case .NoInfo: return "questionmark.circle";
-        }
-    }
-    
-
-
-    var body: some View {
-        let color: Color = getAccentColor(availability:availability)
-        ZStack(alignment: .leading) {
-            Image(systemName: icon).font(Font.system(.subheadline)).padding(.leading, 4).foregroundColor(color)
-            Text(content).bold().padding(.horizontal, 8).padding(.vertical, 4).padding(.leading, 16).background(Capsule().fill(color.opacity(0.05))).font(.subheadline).foregroundColor(color)
-        }
-    }
-}
-
-struct Row: View {
-    @Environment(\.editMode) var mode;
-    var title: String;
-    var availability: Parking.Availability;
-    var spaces: String;
-    var body: some View {
-        HStack {
-            Text(title).bold().font(.headline).padding(.vertical, 24)
-            Spacer()
-            if (self.mode?.wrappedValue.isEditing ?? false) != true {
-                Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
-            }
-        }.frame(maxWidth: .infinity, alignment: .bottom)
-        
-    }
-}
-
 struct ContentView: View {
     @ObservedObject var network: Network
     func getLastUserUpdate() -> String {
@@ -75,10 +15,6 @@ struct ContentView: View {
         dateFormatter.timeStyle = .short
         let value = dateFormatter.string(from: Date())
         return value;
-    }
-    
-    func onRowMove(from source: IndexSet, to destination: Int) -> Void {
-        
     }
     
     var body: some View {
@@ -97,7 +33,7 @@ struct ContentView: View {
                                 let title = "\(parking.location)";
                                 let spaces = String(parking.spaces);
                                 Row(title: title, availability: parking.availability, spaces: spaces)
-                            }.onMove(perform: self.onRowMove)
+                            }
                         }  footer: {
                             if network.lastNetworkUpdateRequest != nil {
                                 VStack(alignment: .center, spacing: 0) {
@@ -109,14 +45,10 @@ struct ContentView: View {
                     }
                 }
             }
-            .toolbar {
-                EditButton()
-            }
             .navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {
-                network.load();
+                network.load { (parkings) in }
             }.onAppear {
-                print("onAppear")
-                network.load();
+                network.load { (parkings) in }
             }
         }
         
