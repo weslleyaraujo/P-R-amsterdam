@@ -9,5 +9,6 @@ import Foundation
 
 enum UserDefaultsKeys: String, Codable {
     case LastNetworkUpdate = "last-network-update",
-        LastNetworkUpdateRequest = "last-network-update-request"
+        LastNetworkUpdateRequest = "last-network-update-request",
+        VisibleParkings = "visible-parkings"
 }

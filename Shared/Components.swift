@@ -94,14 +94,23 @@ struct Row: View {
                 }.frame(maxWidth: .infinity, alignment: .center)
             } else {
                 HStack {
-                    Text(title).bold().font(
-                        isWidget ? .caption2 : .headline
-                    ).padding(.vertical, 24)
+                    Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
                     Spacer()
                     Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
                 }.frame(maxWidth: .infinity, alignment: .bottom)
             }
         
+    }
+}
+
+struct EditingRow: View {
+    var title: String;
+    var checked: Bool
+    var body: some View {
+        Image(systemName: checked ? "checkmark.circle.fill" : "checkmark.circle")
+            .foregroundColor(.accentColor)
+        Text(title)
+        Spacer ()
     }
 }
 
