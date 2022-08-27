@@ -11,7 +11,6 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        print("placeholder")
         return SimpleEntry(date: Date(), parkings: nil, configuration: ConfigurationIntent())
     }
 
@@ -26,7 +25,8 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let network = Network();
         network.load {(parkings) in
-            let timeline = Timeline(entries: [SimpleEntry(date: Date(), parkings: parkings, configuration: configuration)], policy: .atEnd)
+            let now = Date();
+            let timeline = Timeline(entries: [SimpleEntry(date: now, parkings: parkings, configuration: configuration)], policy: .atEnd)
             completion(timeline)
         }
         

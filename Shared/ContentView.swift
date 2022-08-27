@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import WidgetKit;
 
 struct ContentView: View {
     @ObservedObject var network: Network
     @State private  var isShowingSheet = false;
     @State private  var userParkings: [String] = [];
     @ObservedObject var sheetParkings = ObservableArray<String>();
+    @Environment(\.scenePhase) var scenePhase
     
     
     func getLastUserUpdate() -> String {
@@ -76,8 +78,10 @@ struct ContentView: View {
             }
             .navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {
                 network.load { (parkings) in }
+                WidgetCenter.shared.reloadAllTimelines();
             }.onAppear {
                 network.load { (parkings) in }
+                WidgetCenter.shared.reloadAllTimelines();
             }
         }.sheet(isPresented: $isShowingSheet) {
             NavigationView {
@@ -86,6 +90,7 @@ struct ContentView: View {
                         HStack {
                             EditingRow(title: "\(location)", checked: userParkings.contains(location))
                         }
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             if userParkings.contains(location) {
                                 userParkings.removeAll(where: {$0 == location})
@@ -95,7 +100,7 @@ struct ContentView: View {
                         }
                     }
                     .onMove(perform: move)
-                    .listRowInsets(EdgeInsets(top: 0, leading: -25, bottom: 0, trailing: 0))
+                    .listRowInsets(EdgeInsets(top: 24, leading: -24, bottom: 24, trailing: 0))
                     .toolbar {
                         ToolbarItem {
                             Button("Done") {
@@ -109,9 +114,19 @@ struct ContentView: View {
             }
             
         }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                network.load { (parkings) in }
+                WidgetCenter.shared.reloadAllTimelines();
+            }
+        }
     }
 }
 
+// TODO
+// - Make ObservableArray more generic
+// - It should take an array + a key to store data on userDefaults
+// - it should automatically grab data out of userDefaults if available
 
 class ObservableArray<T>: ObservableObject {
   @Published var array: [T]
