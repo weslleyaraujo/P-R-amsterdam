@@ -11,9 +11,18 @@ import WidgetKit;
 struct ContentView: View {
     @ObservedObject var network: Network
     @State private  var isShowingSheet = false;
-    @State private  var userParkings: [String] = [];
-    @ObservedObject var sheetParkings = ObservableArray<String>();
+    @ObservedObject private  var userParkings = ObservableArray<String>(initial: [], key: UserDefaultsKeys.VisibleParkings.rawValue);
+    @ObservedObject var sheetParkings = ObservableArray<String>(initial: [], key: "test");
     @Environment(\.scenePhase) var scenePhase
+    
+    init() {
+        self.network = Network();
+        let sheetParkings = self.sheetParkings;
+        network.load { parkings in
+            sheetParkings.current.append(contentsOf: parkings.data.map { $0.location })
+        }
+    }
+
     
     
     func getLastUserUpdate() -> String {
@@ -25,8 +34,9 @@ struct ContentView: View {
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        sheetParkings.array.move(fromOffsets: source, toOffset: destination)
+        sheetParkings.current.move(fromOffsets: source, toOffset: destination)
     }
+    
     
     var body: some View {
         NavigationView {
@@ -39,7 +49,7 @@ struct ContentView: View {
                     
                 default:
                     if let data = network.parkings?.data {
-                        let content: [String] = userParkings.count == 0 ? data.map {$0.location} : userParkings;
+                        let content: [String] = userParkings.current.count == 0 ? data.map {$0.location} : userParkings.current;
                         let parkings: [Parking.Location] = content.map {
                             let current = $0;
                             guard let location = data.first(where: {$0.location == current}) else {
@@ -67,9 +77,8 @@ struct ContentView: View {
                 }
             }.toolbar {
                 Button(action: {
-                    sheetParkings.array.removeAll();
-                    sheetParkings.array.append(contentsOf: network.parkings?.data.map {$0.location} ?? [])
-                    print(sheetParkings)
+                    sheetParkings.current.removeAll();
+                    sheetParkings.current.append(contentsOf: network.parkings?.data.map {$0.location} ?? [])
                     isShowingSheet.toggle()
                 }) {
                     Label("Edit", systemImage: "slider.horizontal.3")
@@ -86,16 +95,25 @@ struct ContentView: View {
         }.sheet(isPresented: $isShowingSheet) {
             NavigationView {
                 List {
-                    ForEach(sheetParkings.array, id: \.self) { location in
+                    ForEach(sheetParkings.current, id: \.self) { location in
                         HStack {
-                            EditingRow(title: "\(location)", checked: userParkings.contains(location))
+                            EditingRow(title: "\(location)", checked: userParkings.current.contains(location))
                         }
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            if userParkings.contains(location) {
-                                userParkings.removeAll(where: {$0 == location})
+                            if userParkings.current.contains(location) {
+                                userParkings.mutate(produce: { draft in
+                                    var next = draft;
+                                    next.removeAll(where: {$0 == location})
+                                    return next;
+                                })
                             } else {
-                                userParkings.append(location)
+                                userParkings.mutate(produce: { draft in
+                                    var next = draft;
+                                    next.append(location)
+                                    return next;
+                                })
+
                             }
                         }
                     }
@@ -129,11 +147,27 @@ struct ContentView: View {
 // - it should automatically grab data out of userDefaults if available
 
 class ObservableArray<T>: ObservableObject {
-  @Published var array: [T]
-  init(array: [T] = []) {
-     self.array = array
-  }
-  init(repeating value: T, count: Int) {
-     array = Array(repeating: value, count: count)
-  }
+    @Published var current: [T]
+    var key: String;
+    var defaults: UserDefaults = UserDefaults.standard;
+    
+    init(initial: [T] = [], key: String) {
+        self.current = [];
+        self.key = key;
+        self.defaults = UserDefaults.standard
+        let current = self.get();
+        self.mutate(produce:  { _ in
+            return current == nil ? initial : (current ?? [])
+        })
+    }
+    
+    func mutate(produce: @escaping ([T]) -> [T]) {
+        let next = produce(self.current)
+        self.defaults.set(next, forKey: self.key)
+        self.current = next;
+    }
+    
+    func get() -> [T]? {
+        return self.defaults.array(forKey: self.key) as? [T] ?? nil
+    }
 }
