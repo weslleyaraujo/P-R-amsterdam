@@ -10,20 +10,6 @@ import SwiftUI
 import Intents
 
 
-func sortLocations(data: [Location]) -> [Location] {
-    let locations: [Location?] = ALL_PARKINGS.map { id in
-        if let current = data.first(where: { $0.id == id }) {
-            return Location(id: id, availability: current.availability, location: id, spaces: current.spaces);
-        } else {
-            return nil;
-        }
-    }
-    
-    return locations.filter { location in
-        return location != nil;
-    } as! [Location]
-}
-
 struct Provider: IntentTimelineProvider {
     
     func placeholder(in context: Context) -> SimpleEntry {
@@ -34,7 +20,7 @@ struct Provider: IntentTimelineProvider {
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let network = Network();
         network.load {(result) in
-            let entry = SimpleEntry(date: Date(), locations: sortLocations(data: result.data), configuration: configuration)
+            let entry = SimpleEntry(date: Date(), locations: result.data, configuration: configuration)
             completion(entry)
         }
     }
@@ -43,7 +29,7 @@ struct Provider: IntentTimelineProvider {
         let network = Network();
         network.load {(result) in
             let now = Date();
-            let timeline = Timeline(entries: [SimpleEntry(date: now, locations: sortLocations(data: result.data), configuration: configuration)], policy: .atEnd)
+            let timeline = Timeline(entries: [SimpleEntry(date: now, locations: result.data, configuration: configuration)], policy: .atEnd)
             completion(timeline)
         }
         

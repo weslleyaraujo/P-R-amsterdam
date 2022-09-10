@@ -89,21 +89,21 @@ struct Row: View {
     var body: some View {
             if  isWidget {
                 HStack {
-                    Text(title).bold().font(.caption).multilineTextAlignment(.leading).lineLimit(1)
-                    Spacer()
                     if isLoading {
                         ProgressView()
                     } else {
+                        Text(title).bold().font(.caption).multilineTextAlignment(.leading).lineLimit(1)
+                        Spacer()
                         WidgetCount(spaces: spaces, availability: availability)
                     }
                 }.frame(maxWidth: .infinity, alignment: .center)
             } else {
                 HStack {
-                    Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
-                    Spacer()
                     if isLoading {
-                        ProgressView()
+                        ProgressView().padding(.vertical, 24).lineLimit(1)
                     } else {
+                        Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
+                        Spacer()
                         Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
                     }
                 }.frame(maxWidth: .infinity, alignment: .bottom)
@@ -138,6 +138,25 @@ struct EditingRow: View {
             .foregroundColor(.accentColor)
         Text(title)
         Spacer ()
+    }
+}
+
+struct ErrorView: View {
+    var body: some View {
+        HStack {
+            Spacer();
+            VStack(alignment: .center, spacing: 12) {
+                Spacer();
+                Image(systemName: "xmark.circle").foregroundColor(.red).font(.system(size: 60))
+                Text("There was a network error.")
+                    .bold()
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .font(.subheadline)
+                Spacer();
+            }
+            Spacer();
+        }
     }
 }
 

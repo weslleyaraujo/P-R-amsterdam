@@ -17,8 +17,22 @@ enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
 
 var API_URL = "https://park-and-ride-api.vercel.app/api/hello"
 
+let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+
+
 class Network: ObservableObject {
     let localStorage = UserDefaults.standard;
+    
+    private func request() -> URLRequest {
+        guard let url = URL(string: API_URL) else {
+            onRequestFailed();
+            fatalError()
+        }
+        
+        var request = URLRequest(url: url)
+        request.addValue("\(APP_VERSION!)", forHTTPHeaderField: "APP_VERSION");
+        return request;
+    }
     
     private func onPreRequest() {
         let now = Date();
@@ -54,25 +68,22 @@ class Network: ObservableObject {
     }
     
     func loadAsync() async  {
+        
         onPreRequest();
         
         if (!shouldUpdate()) {
             return;
         }
         
-        guard let url = URL(string: API_URL) else {
-            onRequestFailed();
-            fatalError()
-        }
-        
 
         onRequestStart()
         
         do {
-            let (data, response) = try await URLSession.shared.data(for: URLRequest(url: url));
+            let request = request();
+            let (data, response) = try await URLSession.shared.data(for: request);
             guard let result = response as? HTTPURLResponse, result.statusCode == 200 else {
                 DispatchQueue.main.async { self.onRequestFailed() }
-                fatalError()
+                return;
             }
             
             DispatchQueue.main.async {
@@ -103,11 +114,10 @@ class Network: ObservableObject {
         }
         
         
-        guard let url = URL(string: API_URL) else { fatalError("Missing URL") }
-        let urlRequest = URLRequest(url: url)
+        let request = request();
         onRequestStart()
         
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 print("Request error: ", error)

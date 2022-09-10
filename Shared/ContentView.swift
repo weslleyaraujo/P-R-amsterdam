@@ -33,17 +33,27 @@ struct ContentView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(ALL_PARKINGS, id: \.self) { id in
-                        let current = network.response?.data.first(where: {$0.id == id});
-                        if (network.status == Status.Resolved && current == nil) {
-                            EmptyView()
-                        } else {
+                    if (network.status == Status.Pending) {
+                        ForEach(ALL_PARKINGS, id: \.self) { current in
                             Row(
-                                title: id,
-                                availability: current?.availability ?? Availability.NoInfo,
-                                spaces: String(current?.spaces ?? 0),
-                                isLoading: Status.Pending == network.status.self
+                                title: "",
+                                availability: Availability.NoInfo,
+                                spaces: "",
+                                isLoading: true
                             )
+                        }
+                    } else if (network.status == Status.Rejected) {
+                        ErrorView();
+                    } else {
+                        if let data = network.response?.data {
+                            ForEach(data) { current in
+                                Row(
+                                    title: current.id,
+                                    availability: current.availability,
+                                    spaces: String(current.spaces),
+                                    isLoading: Status.Pending == network.status.self
+                                )
+                            }
                         }
                     }
                 }  footer: {
