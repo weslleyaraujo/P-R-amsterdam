@@ -51,7 +51,7 @@ struct ContentView: View {
                                     title: current.id,
                                     availability: current.availability,
                                     spaces: String(current.spaces),
-                                    isLoading: Status.Pending == network.status.self
+                                    isLoading: Status.Pending == network.status
                                 )
                             }
                         }
