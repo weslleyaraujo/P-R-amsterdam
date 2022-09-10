@@ -11,22 +11,23 @@ import Intents
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        return SimpleEntry(date: Date(), parkings: nil, configuration: ConfigurationIntent())
+        let locations = ALL_PARKINGS.map {Location(id: $0, availability: Availability.NoInfo, location: $0, spaces: 0)}
+        return SimpleEntry(date: Date(), locations: locations, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let network = Network();
-        network.load {(parkings) in
-            let entry = SimpleEntry(date: Date(), parkings: nil, configuration: configuration)
+        network.load {(result) in
+            let entry = SimpleEntry(date: Date(), locations: result.data, configuration: configuration)
             completion(entry)
         }
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let network = Network();
-        network.load {(parkings) in
+        network.load {(result) in
             let now = Date();
-            let timeline = Timeline(entries: [SimpleEntry(date: now, parkings: parkings, configuration: configuration)], policy: .atEnd)
+            let timeline = Timeline(entries: [SimpleEntry(date: now, locations: result.data, configuration: configuration)], policy: .atEnd)
             completion(timeline)
         }
         
@@ -35,7 +36,7 @@ struct Provider: IntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     var date: Date
-    var parkings: Parking?
+    var locations: [Location]
     let configuration: ConfigurationIntent
 }
 
@@ -50,13 +51,14 @@ struct WidgetEntryView : View {
         default: return 11;
         }
     }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: widgetFamily.description == "systemLarge" ? 12 : 6) {
-            if let data = entry.parkings?.data {
-                ForEach(data[0..<count]) { parking in
-                    let title = "\(parking.location)";
-                    let spaces = String(parking.spaces);
-                    Row(title: title, availability: parking.availability, spaces: spaces, isWidget: true)
+            if let data = entry.locations {
+                ForEach(data[0..<count]) { current in
+                    let title = "\(current.location)";
+                    let spaces = String(current.spaces);
+                    Row(title: title, availability: current.availability, spaces: spaces, isWidget: true)
                 }
             }
         }.padding(.horizontal, 16)
@@ -71,13 +73,13 @@ struct ParkAndRideWidget: Widget {
             WidgetEntryView(entry: entry)
         }
         .configurationDisplayName("P+R Amsterdam")
-        .description("Lorem ipsum")
+        .description("Quickly track Amsterdam P+R availability")
     }
 }
 
 struct Widget_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetEntryView(entry: SimpleEntry(date: Date(), parkings: nil, configuration: ConfigurationIntent()))
+        WidgetEntryView(entry: SimpleEntry(date: Date(), locations: [], configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

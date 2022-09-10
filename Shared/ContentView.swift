@@ -41,48 +41,27 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                switch network.status {
-                case .Pending:
-                    ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
-                case .Rejected:
-                    Text("Error")
-                    
-                default:
-                    if let data = network.parkings?.data {
-                        let content: [String] = userParkings.current.count == 0 ? data.map {$0.location} : userParkings.current;
-                        let parkings: [Parking.Location] = content.map {
-                            let current = $0;
-                            guard let location = data.first(where: {$0.location == current}) else {
-                                fatalError()
-                            }
-                            return location;
-                            
-                        }
-                        
-                        Section {
-                            ForEach(parkings) { parking in
-                                let title = "\(parking.location)";
-                                let spaces = String(parking.spaces);
-                                Row(title: title, availability: parking.availability, spaces: spaces)
-                            }
-                        }  footer: {
-                            if network.lastNetworkUpdateRequest != nil {
-                                VStack(alignment: .center, spacing: 0) {
-                                    Spacer(minLength: 2)
-                                    Text("Last updated at \(self.getLastUserUpdate())").font(.caption2)
-                                }.frame(maxWidth: .infinity)
-                            }
-                        }
+                Section {
+                    ForEach(ALL_PARKINGS, id: \.self) { id in
+                        let current = network.parkings?.data.first(where: {$0.id == id});
+                        Row(title: id, availability: current?.availability ?? Availability.NoInfo, spaces: String(current?.spaces ?? 0), isLoading: network.status.self != Status.Resolved)
+                    }
+                }  footer: {
+                    if network.lastNetworkUpdateRequest != nil {
+                        VStack(alignment: .center, spacing: 0) {
+                            Spacer(minLength: 2)
+                            Text("Last updated at \(self.getLastUserUpdate())").font(.caption2)
+                        }.frame(maxWidth: .infinity)
                     }
                 }
             }.toolbar {
-                Button(action: {
-                    sheetParkings.current.removeAll();
-                    sheetParkings.current.append(contentsOf: network.parkings?.data.map {$0.location} ?? [])
-                    isShowingSheet.toggle()
-                }) {
-                    Label("Edit", systemImage: "slider.horizontal.3")
-                }
+//                Button(action: {
+//                    sheetParkings.current.removeAll();
+//                    sheetParkings.current.append(contentsOf: network.parkings?.data.map {$0.location} ?? [])
+//                    isShowingSheet.toggle()
+//                }) {
+//                    Label("Edit", systemImage: "slider.horizontal.3")
+//                }
                 
             }
             .navigationTitle("P+R Amsterdam").background(Color.black.opacity(0.05)).refreshable {

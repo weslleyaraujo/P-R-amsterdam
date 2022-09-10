@@ -8,10 +8,14 @@
 import Foundation
 import SwiftUI
 
+struct Parking:  Decodable {
+    var data: [Location]
+}
 
+
+enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
 class Network: ObservableObject {
     let defaults = UserDefaults.standard;
-    enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
     func load(completion: @escaping (Parking) -> ()) {
         let now = Date();
         defaults.set(now, forKey: UserDefaultsKeys.LastNetworkUpdateRequest.rawValue);
