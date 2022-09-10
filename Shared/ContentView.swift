@@ -48,18 +48,13 @@ struct ContentView: View {
                     }
                 }  footer: {
                     if network.lastNetworkUpdateRequest != nil {
-                        VStack(alignment: .center, spacing: 0) {
-                            Spacer(minLength: 2)
-                            Text("Last updated at \(self.getLastUserUpdate())").font(.caption2)
-                        }.frame(maxWidth: .infinity)
+                        Footer()
                     }
                 }
                 
             }
             .navigationTitle("P+R Amsterdam")
-            .refreshable {
-                await reload();
-            }
+            .refreshable { await reload() }
             .onAppear {
                 Task.init { await reload() }
             }

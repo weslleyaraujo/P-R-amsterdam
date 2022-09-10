@@ -112,6 +112,24 @@ struct Row: View {
     }
 }
 
+struct Footer: View {
+    func getFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        return formatter;
+    }
+    
+    var body: some View {
+        let formatter = getFormatter();
+        let date = formatter.string(from: Date());
+        VStack(alignment: .center, spacing: 0) {
+            Spacer(minLength: 2)
+            Text("Last updated at \(date)").font(.caption2)
+        }.frame(maxWidth: .infinity)
+    }
+}
+
 struct EditingRow: View {
     var title: String;
     var checked: Bool
