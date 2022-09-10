@@ -12,3 +12,6 @@ enum UserDefaultsKeys: String, Codable {
         LastNetworkUpdateRequest = "last-network-update-request",
         VisibleParkings = "visible-parkings"
 }
+
+
+

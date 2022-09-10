@@ -19,7 +19,7 @@ var ALL_PARKINGS = [
     "Zeeburg 2",
     "Olympisch Stadion",
     "RAI",
-    "Johan Cruijff ArenA"
+    "Johan Cruijff ArenA",
 ]
 
 enum Availability: String, Codable {
