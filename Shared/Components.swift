@@ -113,6 +113,7 @@ struct Row: View {
 }
 
 struct Footer: View {
+    var date: Date;
     func getFormatter() -> DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -122,10 +123,9 @@ struct Footer: View {
     
     var body: some View {
         let formatter = getFormatter();
-        let date = formatter.string(from: Date());
         VStack(alignment: .center, spacing: 0) {
             Spacer(minLength: 2)
-            Text("Last updated at \(date)").font(.caption2)
+            Text("Last updated at \(formatter.string(from: date))").font(.caption2)
         }.frame(maxWidth: .infinity)
     }
 }

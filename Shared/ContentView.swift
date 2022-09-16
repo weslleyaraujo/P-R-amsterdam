@@ -58,7 +58,7 @@ struct ContentView: View {
                     }
                 }  footer: {
                     if network.lastNetworkUpdateRequest != nil {
-                        Footer()
+                        Footer(date: (network.lastNetworkUpdateRequest ?? Date()))
                     }
                 }
                 

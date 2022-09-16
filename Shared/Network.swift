@@ -34,13 +34,11 @@ class Network: ObservableObject {
         return request;
     }
     
-    private func onPreRequest() {
+    
+    private func onRequestStart() {
         let now = Date();
         localStorage.set(now, forKey: "\(UserDefaultsKeys.LastNetworkUpdateRequest)");
         self.lastNetworkUpdateRequest = now;
-    }
-    
-    private func onRequestStart() {
         self.status = self.response != nil ? Status.Refreshing: Status.Pending;
     }
     
@@ -57,25 +55,8 @@ class Network: ObservableObject {
         self.status = Status.Resolved;
     }
    
-    func shouldUpdate() -> Bool {
-        let lastUpdate =
-            localStorage.object(forKey: "\(UserDefaultsKeys.LastNetworkUpdate)") as? Date ?? Date();
-        
-        let diff =
-            (Date().timeIntervalSinceReferenceDate - lastUpdate.timeIntervalSinceReferenceDate) / 60.0;
-        
-        return !Bool(diff < 1 && response != nil)
-    }
-    
     func loadAsync() async  {
         
-        onPreRequest();
-        
-        if (!shouldUpdate()) {
-            return;
-        }
-        
-
         onRequestStart()
         
         do {
@@ -107,14 +88,9 @@ class Network: ObservableObject {
     }
     
     func load(completion: @escaping (ResponseBody) -> ()) {
-        onPreRequest();
-        
-        if (!shouldUpdate()) {
-            return;
-        }
-        
         
         let request = request();
+        
         onRequestStart()
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
