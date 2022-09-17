@@ -34,9 +34,9 @@ struct ContentView: View {
             List {
                 Section {
                     if (network.status == Status.Pending) {
-                        ForEach(ALL_PARKINGS, id: \.self) { current in
+                        ForEach(ALL_PARKINGS, id: \.self) { title in
                             Row(
-                                title: "",
+                                title: title,
                                 availability: Availability.NoInfo,
                                 spaces: "",
                                 isLoading: true
