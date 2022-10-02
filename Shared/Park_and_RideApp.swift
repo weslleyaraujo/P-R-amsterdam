@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct Park_and_RideApp: App {
-    var network = Network();
     var body: some Scene {
         WindowGroup {
             ContentView()

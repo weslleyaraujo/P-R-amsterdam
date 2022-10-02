@@ -72,6 +72,11 @@ class Network: ObservableObject {
         onPreRequest();
         
         if (shouldSkip()) {
+            do {
+                try await Task.sleep(nanoseconds: UInt64(2 * 1_000_000_000));
+            } catch {
+                
+            }
             return;
         }
         

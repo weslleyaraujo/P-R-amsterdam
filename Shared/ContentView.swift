@@ -16,14 +16,6 @@ struct ContentView: View {
         self.network = Network();
     }
     
-    func getLastUserUpdate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
-        let value = dateFormatter.string(from: Date())
-        return value;
-    }
-    
     func reload() async {
         await network.loadAsync()
         WidgetCenter.shared.reloadAllTimelines();

@@ -89,8 +89,8 @@
 		C0DE2A8428B0011D0078EB1A /* Park_and_RideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Park_and_RideApp.swift; sourceTree = "<group>"; };
 		C0DE2A8528B0011D0078EB1A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C0DE2A8628B0011E0078EB1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C0DE2A8B28B0011E0078EB1A /* Park and Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Park and Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0DE2A9128B0011E0078EB1A /* Park and Ride.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Park and Ride.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE2A8B28B0011E0078EB1A /* P+R Amsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P+R Amsterdam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0DE2A9128B0011E0078EB1A /* P+R Amsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "P+R Amsterdam.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DE2A9328B0011E0078EB1A /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		C0DE2A9828B0011E0078EB1A /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DE2A9C28B0011E0078EB1A /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 		C0DE2A8C28B0011E0078EB1A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0DE2A8B28B0011E0078EB1A /* Park and Ride.app */,
-				C0DE2A9128B0011E0078EB1A /* Park and Ride.app */,
+				C0DE2A8B28B0011E0078EB1A /* P+R Amsterdam.app */,
+				C0DE2A9128B0011E0078EB1A /* P+R Amsterdam.app */,
 				C0DE2A9828B0011E0078EB1A /* Tests iOS.xctest */,
 				C0DE2AA428B0011E0078EB1A /* Tests macOS.xctest */,
 				C04F1E0E28B40280004DDAE5 /* WidgetExtension.appex */,
@@ -266,7 +266,7 @@
 			);
 			name = "Park and Ride (iOS)";
 			productName = "Park and Ride (iOS)";
-			productReference = C0DE2A8B28B0011E0078EB1A /* Park and Ride.app */;
+			productReference = C0DE2A8B28B0011E0078EB1A /* P+R Amsterdam.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C0DE2A9028B0011E0078EB1A /* Park and Ride (macOS) */ = {
@@ -283,7 +283,7 @@
 			);
 			name = "Park and Ride (macOS)";
 			productName = "Park and Ride (macOS)";
-			productReference = C0DE2A9128B0011E0078EB1A /* Park and Ride.app */;
+			productReference = C0DE2A9128B0011E0078EB1A /* P+R Amsterdam.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C0DE2A9728B0011E0078EB1A /* Tests iOS */ = {
@@ -500,7 +500,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M35XE7CE36;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
@@ -512,7 +512,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -529,7 +529,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M35XE7CE36;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Widget/Info.plist;
@@ -541,7 +541,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride.Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -669,7 +669,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M35XE7CE36;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -684,9 +684,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride";
-				PRODUCT_NAME = "Park and Ride";
+				PRODUCT_NAME = "P+R Amsterdam";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -701,7 +701,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M35XE7CE36;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -716,9 +716,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride";
-				PRODUCT_NAME = "Park and Ride";
+				PRODUCT_NAME = "P+R Amsterdam";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -735,7 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -746,7 +746,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride";
-				PRODUCT_NAME = "Park and Ride";
+				PRODUCT_NAME = "P+R Amsterdam";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -761,7 +761,7 @@
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 11;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -772,7 +772,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "weslleyaraujo.Park-and-Ride";
-				PRODUCT_NAME = "Park and Ride";
+				PRODUCT_NAME = "P+R Amsterdam";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

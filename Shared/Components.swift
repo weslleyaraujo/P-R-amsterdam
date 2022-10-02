@@ -100,6 +100,8 @@ struct Row: View {
             } else {
                 HStack {
                     if isLoading {
+                        Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
+                        Spacer()
                         ProgressView().padding(.vertical, 24).lineLimit(1)
                     } else {
                         Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
