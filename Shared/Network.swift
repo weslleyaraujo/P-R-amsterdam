@@ -15,7 +15,7 @@ struct ResponseBody:  Decodable {
 
 enum Status {  case Pending, Idle, Rejected, Resolved, Refreshing }
 
-var API_URL = "https://park-and-ride-api.vercel.app/api/hello"
+var API_URL = "https://park-and-ride-api.vercel.app/api/v1"
 
 let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
 
