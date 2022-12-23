@@ -37,11 +37,15 @@ class Network: ObservableObject {
     private func onPreRequest() {
         let now = Date();
         localStorage.set(now, forKey: "\(UserDefaultsKeys.LastNetworkUpdateRequest)");
-        self.lastNetworkUpdateRequest = now;
+        DispatchQueue.main.async {
+            self.lastNetworkUpdateRequest = now;
+        }
     }
     
     private func onRequestStart() {
-        self.status = self.response != nil ? Status.Refreshing: Status.Pending;
+        DispatchQueue.main.async {
+            self.status = self.response != nil ? Status.Refreshing: Status.Pending;
+        }
     }
     
     private func onRequestFailed() {
