@@ -36,6 +36,9 @@
 		C0DE2ACC28B219350078EB1A /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2A9C28B0011E0078EB1A /* Tests_iOS.swift */; };
 		C0DE2ACE28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */; };
 		C0DE2ACF28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */; };
+		C20C97162959FB4500C75249 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20C97152959FB4500C75249 /* Array+Extensions.swift */; };
+		C20C97172959FB4500C75249 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20C97152959FB4500C75249 /* Array+Extensions.swift */; };
+		C20C97182959FB4500C75249 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20C97152959FB4500C75249 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,7 @@
 		C0DE2AC028B002360078EB1A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		C0DE2AC928B002B50078EB1A /* ParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingModel.swift; sourceTree = "<group>"; };
 		C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		C20C97152959FB4500C75249 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 				C0DE2A8528B0011D0078EB1A /* ContentView.swift */,
 				C0DE2A8628B0011E0078EB1A /* Assets.xcassets */,
 				C0DE2AC028B002360078EB1A /* Network.swift */,
+				C20C97152959FB4500C75249 /* Array+Extensions.swift */,
 				C0DE2ACD28B2217B0078EB1A /* UserDefaultsKeys.swift */,
 				C01F137128B4062C006A72A9 /* Components.swift */,
 			);
@@ -422,6 +427,7 @@
 				C04F1E1B28B40281004DDAE5 /* Widget.intentdefinition in Sources */,
 				C04F1E1628B40280004DDAE5 /* Widget.swift in Sources */,
 				C01F137528B407F1006A72A9 /* Network.swift in Sources */,
+				C20C97182959FB4500C75249 /* Array+Extensions.swift in Sources */,
 				C01F137428B4062C006A72A9 /* Components.swift in Sources */,
 				C04F1E2628B4048D004DDAE5 /* ParkingModel.swift in Sources */,
 				C04F1E2728B40490004DDAE5 /* UserDefaultsKeys.swift in Sources */,
@@ -435,6 +441,7 @@
 				C0DE2AAE28B0011E0078EB1A /* ContentView.swift in Sources */,
 				C0DE2AAC28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
 				C04F1E1C28B40281004DDAE5 /* Widget.intentdefinition in Sources */,
+				C20C97162959FB4500C75249 /* Array+Extensions.swift in Sources */,
 				C01F137228B4062C006A72A9 /* Components.swift in Sources */,
 				C0DE2ACE28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */,
 				C0DE2ACA28B002B50078EB1A /* ParkingModel.swift in Sources */,
@@ -449,6 +456,7 @@
 				C0DE2AAF28B0011E0078EB1A /* ContentView.swift in Sources */,
 				C01F137328B4062C006A72A9 /* Components.swift in Sources */,
 				C0DE2AAD28B0011E0078EB1A /* Park_and_RideApp.swift in Sources */,
+				C20C97172959FB4500C75249 /* Array+Extensions.swift in Sources */,
 				C0DE2ACF28B2217B0078EB1A /* UserDefaultsKeys.swift in Sources */,
 				C0DE2ACB28B002B50078EB1A /* ParkingModel.swift in Sources */,
 				C0DE2AC228B002360078EB1A /* Network.swift in Sources */,
