@@ -23,7 +23,9 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                favoriteSection
+                if !favoriteIds.isEmpty {
+                    favoriteSection
+                }
                 allSection
             }
             .navigationTitle("P+R Amsterdam")
