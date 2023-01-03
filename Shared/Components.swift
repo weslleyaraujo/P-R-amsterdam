@@ -81,18 +81,25 @@ struct WidgetCount: View {
 }
 
 struct Row: View {
+
     var title: String;
     var availability: Availability;
     var spaces: String;
     var isWidget: Bool = false;
     var isLoading: Bool =  false;
+    
+    @AppStorage("favoriteIds") var favoriteIds: [String] = []
+    
     var body: some View {
-            if  isWidget {
+            if isWidget {
                 HStack {
                     if isLoading {
                         ProgressView()
                     } else {
                         Text(title).bold().font(.caption).multilineTextAlignment(.leading).lineLimit(1)
+                        
+                        
+                        
                         Spacer()
                         WidgetCount(spaces: spaces, availability: availability)
                     }
@@ -105,6 +112,10 @@ struct Row: View {
                         ProgressView().padding(.vertical, 24).lineLimit(1)
                     } else {
                         Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
+                        if favoriteIds.contains(title) {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                        }
                         Spacer()
                         Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
                     }

@@ -21,6 +21,9 @@ let APP_VERSION = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? 
 
 
 class Network: ObservableObject {
+    
+    @Published var locations: [Location] = []
+    
     let localStorage = UserDefaults.standard;
     
     private func request() -> URLRequest {
@@ -58,6 +61,7 @@ class Network: ObservableObject {
     
     private func onRequestSucceed(result: ResponseBody) {
         self.response = result;
+        self.locations = result.data
         self.status = Status.Resolved;
     }
    
@@ -156,3 +160,4 @@ class Network: ObservableObject {
     @Published var status: Status = Status.Idle;
     @Published var lastNetworkUpdateRequest: Date? = nil;
 }
+
