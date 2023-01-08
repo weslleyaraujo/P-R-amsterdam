@@ -88,22 +88,27 @@ struct Row: View {
     var isWidget: Bool = false;
     var isLoading: Bool =  false;
     
-    @AppStorage("favoriteIds") var favoriteIds: [String] = []
+    @AppStorage("favoriteIds", store: UserDefaults(suiteName: "group.park-and-ride")) var favoriteIds: [String] = []
     
     var body: some View {
             if isWidget {
-                HStack {
-                    if isLoading {
-                        ProgressView()
-                    } else {
-                        Text(title).bold().font(.caption).multilineTextAlignment(.leading).lineLimit(1)
-                        
-                        
-                        
-                        Spacer()
-                        WidgetCount(spaces: spaces, availability: availability)
+                HStack(spacing: 2) {
+                    if favoriteIds.contains(title) {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                            .font(.system(size: 6))
+                            .padding(.leading, -8)
                     }
-                }.frame(maxWidth: .infinity, alignment: .center)
+                    HStack {
+                        if isLoading {
+                            ProgressView()
+                        } else {
+                            Text(title).bold().font(.caption).multilineTextAlignment(.leading).lineLimit(1)
+                            Spacer()
+                            WidgetCount(spaces: spaces, availability: availability)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .center)
+                }
             } else {
                 HStack {
                     if isLoading {
@@ -111,11 +116,13 @@ struct Row: View {
                         Spacer()
                         ProgressView().padding(.vertical, 24).lineLimit(1)
                     } else {
-                        Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
                         if favoriteIds.contains(title) {
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)
+                                .font(.system(size: 12))
                         }
+
+                        Text(title).bold().font(.headline).padding(.vertical, 24).lineLimit(1)
                         Spacer()
                         Count(spaces: spaces, availability: availability).padding(.horizontal, 2)
                     }

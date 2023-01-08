@@ -9,9 +9,28 @@ import WidgetKit
 import SwiftUI
 import Intents
 
+func buildLocations(favoriteIds: [String], data: [Location]) -> [Location] {
+    let favorites : [Location]? = {
+        let allFavorites = favoriteIds.map { (favorite) in {
+            return data.first{$0.id == favorite};
+        }()}
+        var temp = [Location]()
+        for i in allFavorites {
+            if let i = i {
+                temp.append(i)
+            } else {
+                return nil
+            }
+        }
+        return temp
+    }()
+    let rest = data.filter { !favoriteIds.contains($0.id)}
+    return favorites! + rest;
+}
+
 
 struct Provider: IntentTimelineProvider {
-    
+    @AppStorage("favoriteIds", store: UserDefaults(suiteName: "group.park-and-ride")) var favoriteIds: [String] = []
     func placeholder(in context: Context) -> SimpleEntry {
         let locations = ALL_PARKINGS.map {Location(id: $0, availability: Availability.NoInfo, location: $0, spaces: 0)}
         return SimpleEntry(date: Date(), locations: locations, configuration: ConfigurationIntent())
@@ -20,7 +39,7 @@ struct Provider: IntentTimelineProvider {
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let network = Network();
         network.load {(result) in
-            let entry = SimpleEntry(date: Date(), locations: result.data, configuration: configuration)
+            let entry = SimpleEntry(date: Date(), locations: buildLocations(favoriteIds: favoriteIds, data: result.data), configuration: configuration)
             completion(entry)
         }
     }
@@ -29,7 +48,7 @@ struct Provider: IntentTimelineProvider {
         let network = Network();
         network.load {(result) in
             let now = Date();
-            let timeline = Timeline(entries: [SimpleEntry(date: now, locations: result.data, configuration: configuration)], policy: .atEnd)
+            let timeline = Timeline(entries: [SimpleEntry(date: now, locations: buildLocations(favoriteIds: favoriteIds, data: result.data), configuration: configuration)], policy: .atEnd)
             completion(timeline)
         }
         

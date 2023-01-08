@@ -11,7 +11,7 @@ import WidgetKit;
 struct ContentView: View {
     @StateObject var network = Network()
     
-    @AppStorage("favoriteIds") var favoriteIds: [String] = []
+    @AppStorage("favoriteIds", store: UserDefaults(suiteName: "group.park-and-ride")) var favoriteIds: [String] = []
     
     @Environment(\.scenePhase) var scenePhase
 
@@ -56,26 +56,30 @@ struct ContentView: View {
                 ErrorView();
             } else {
                 if let locations = network.locations {
-                    ForEach(locations.filter { favoriteIds.contains($0.id)}) { location in
-                        Row(
-                            title: location.id,
-                            availability: location.availability,
-                            spaces: String(location.spaces),
-                            isLoading: Status.Pending == network.status
-                        )
-                        .contextMenu {
-                            Button {
-                                if favoriteIds.contains(location.id) {
-                                    if let index = favoriteIds.firstIndex(of: location.id) {
-                                        favoriteIds.remove(at: index)
+                    ForEach(favoriteIds, id: \.self) { favorite in
+                        if let location = locations.first{$0.id == favorite} {
+                            Row(
+                                title: location.id,
+                                availability: location.availability,
+                                spaces: String(location.spaces),
+                                isLoading: Status.Pending == network.status
+                            )
+                            .contextMenu {
+                                Button {
+                                    if favoriteIds.contains(location.id) {
+                                        if let index = favoriteIds.firstIndex(of: location.id) {
+                                            favoriteIds.remove(at: index)
+                                        }
+                                    } else {
+                                        favoriteIds.append(location.id)
                                     }
-                                } else {
-                                    favoriteIds.append(location.id)
+                                    
+                                    Task.init {await reload()}
+                                } label: {
+                                    Text(favoriteIds.contains(location.id) ? "Unfavorite" : "Favorite")
                                 }
-                            } label: {
-                                Text(favoriteIds.contains(location.id) ? "Unfavorite" : "Favorite")
+                                
                             }
-
                         }
                     }
                 }
